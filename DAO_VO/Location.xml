@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
+<!DOCTYPE daogen-metadata>
+
+<daogen-metadata>
+<version>2.4.1</version>
+<timestamp>15.10.2011</timestamp>
+
+<tableName>Location</tableName>
+<className>Location</className>
+<language>php</language>
+<database>mysql</database>
+<useCache>false</useCache>
+<classPackage></classPackage>
+<columns>
+<dbColumn PK="true" colType="Int" colName="id" varName="id"
+                automatic="false" valueSource="" indexed="true" colLength="10" orderLevel="1" orderType="ASC" />
+
+<dbColumn PK="false" colType="String" colName="latitude" varName="latitude"
+                 automatic="false" valueSource="" indexed="false" colLength="255" orderLevel="0" orderType="ASC" />
+
+<dbColumn PK="false" colType="String" colName="longitude" varName="longitude"
+                 automatic="false" valueSource="" indexed="false" colLength="255" orderLevel="0" orderType="ASC" />
+
+<dbColumn PK="false" colType="String" colName="name" varName="name"
+                 automatic="false" valueSource="" indexed="false" colLength="255" orderLevel="0" orderType="ASC" />
+
+</columns>
+</daogen-metadata>

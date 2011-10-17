@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
+<!DOCTYPE daogen-metadata>
+
+<daogen-metadata>
+<version>2.4.1</version>
+<timestamp>15.10.2011</timestamp>
+
+<tableName>Route</tableName>
+<className>Route</className>
+<language>php</language>
+<database>mysql</database>
+<useCache>false</useCache>
+<classPackage></classPackage>
+<columns>
+<dbColumn PK="true" colType="Int" colName="id" varName="id"
+                automatic="false" valueSource="" indexed="true" colLength="10" orderLevel="0" orderType="ASC" />
+
+<dbColumn PK="true" colType="Int" colName="leg_id" varName="legId"
+                automatic="false" valueSource="" indexed="true" colLength="10" orderLevel="1" orderType="ASC" />
+
+<dbColumn PK="false" colType="String" colName="start_location_id" varName="startLocationId"
+                automatic="false" valueSource="" indexed="false" colLength="255" orderLevel="0" orderType="ASC" />
+
+<dbColumn PK="false" colType="String" colName="end_location_id" varName="endLocationId"
+                automatic="false" valueSource="" indexed="false" colLength="255" orderLevel="0" orderType="ASC" />
+
+</columns>
+</daogen-metadata>
