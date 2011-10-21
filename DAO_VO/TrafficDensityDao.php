@@ -292,12 +292,20 @@ class TrafficDensityDao
                    return $searchResults;
                   */
 
+                $routeid_q = "";
                 if ($valueObject->getRouteId() != 0) {
                         $routeid = $valueObject->getRouteId();
+                        $routeid_q =" and r.id=".$routeid." and t.route_id=".$routeid;  
+
+                }
+                $legid_q = "";
+                if ($valueObject->getLegId() != 0) {
+                        $legid = $valueObject->getLegId();
+                        $legid_q =" and r.leg_id=".$legid;  
                 }
 
-                $sql = "select l1.latitude as start_latitude, l1.longitude as start_longitude, l2.latitude as end_latitude, l2.longitude as end_longitude, n.density from Location l1, Location l2,(select r.start_location_id, r.end_location_id, t.density from Route r, TrafficDensity t where r.leg_id=t.leg_id and r.id = ". $routeid. ") n where l1.id=n.start_location_id and l2.id=end_location_id";
-                //  echo $sql . "\n";
+                $sql = "select l1.latitude as start_latitude, l1.longitude as start_longitude, l2.latitude as end_latitude, l2.longitude as end_longitude, n.density from Location l1, Location l2,(select r.start_location_id, r.end_location_id, t.density from Route r, TrafficDensity t where r.leg_id=t.leg_id ". $routeid_q. " ".$legid_q.") n where l1.id=n.start_location_id and l2.id=end_location_id";
+               //   echo $sql . "\n";
                 $searchResults = $this->listQuery($conn, $sql);
                 //  var_dump($searchResults);
                 return $searchResults;

@@ -17,6 +17,7 @@ case 'get':
         $requestContext["request_type"] = $request["request_type"];
         $requestContext["src_location"] = $request["src_location"];
         $requestContext["dest_location"] = $request["dest_location"];
+        $requestContext["traffic_density"] = $request["traffic_density"];
         $requestTypeObj = new TrafficRequestType();
         $requestTypeEnum = $requestTypeObj->getTrafficRequestType($requestContext["request_type"]);
 

@@ -1,7 +1,7 @@
 <?php
 
-require_once 'TrafficBrowseHandler.php';
-require_once 'TrafficUpdateHandler.php';
+require_once 'TrafficBrowseModel.php';
+require_once 'TrafficUpdateModel.php';
 require_once 'TrafficRequestType.php';
 
 class TrafficHandler
@@ -9,11 +9,11 @@ class TrafficHandler
 
         function createHandler($requestType) {
                 if ($requestType == TrafficRequestType::BROWSE) {
-                        $handler = new TrafficBrowseHandler();
+                        $model = new TrafficBrowseModel();
                 } else if ($requestType == TrafficRequestType::UPDATE) {
-                        $handler = new TrafficUpdateHandler();
+                        $model = new TrafficUpdateModel();
                 }
-                return $handler;
+                return $model;
         }
 
         function processRequest($requestType,$requestContext) {
