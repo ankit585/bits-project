@@ -1,14 +1,11 @@
 <?php
-require_once 'DAO_VO/TrafficDensityDao.php';
 require_once 'DAO_VO/TrafficDensity.php';
-require_once 'DAO_VO/LocationDao.php';
 require_once 'DAO_VO/Location.php';
-require_once 'DAO_VO/RouteDao.php';
 require_once 'DAO_VO/Route.php';
-require_once 'DAO_VO/Datasource.php';
+require_once 'DataFactory.php';
 
 
-class TrafficBrowseHandler
+class TrafficBrowseModel
 {
 
         function processRequest($requestContext) {
@@ -22,8 +19,10 @@ class TrafficBrowseHandler
         function getTrafficDensity($src,$dest) {
 
                 $conn = new Datasource('fa3.ads.corp.sp1.yahoo.com', 'tss', 'ui_user', 'some_pass');
-
-                $locationDao = new LocationDao();
+                $td = array();
+                $df = new DataFactory();
+                
+                $locationDao = $df->createLocationDAO();
                 $location = $locationDao->createValueObject();
 
                 $location->setName($src);
@@ -32,19 +31,20 @@ class TrafficBrowseHandler
                 $location->setName($dest);
                 $endLocId=$locationDao->searchMatching($conn, $location);
 
-                $routeDao = new RouteDao();
+                $routeDao = $df->createRouteDAO();
                 $route = $routeDao->createValueObject();
 
                 $route->setStartLocationId($startLocId[0]->getId());
                 $route->setEndLocationId($endLocId[0]->getId());
 
                 $routeId = $routeDao->searchMatching($conn, $route);
-
-                $trafficDensityDao = new TrafficDensityDao();
-                $trafficDensity = $trafficDensityDao->createValueObject();
-                $trafficDensity->setRouteId($routeId[0]->getId());
-
-                return $trafficDensityDao->searchMatching($conn, $trafficDensity);
+                foreach ($routeId as $r) { 
+                      $trafficDensityDao = $df->createTrafficDensityDAO();
+                      $trafficDensity = $trafficDensityDao->createValueObject();
+                      $trafficDensity->setRouteId($r->getId());
+                      $td = array_merge($td , $trafficDensityDao->searchMatching($conn, $trafficDensity));
+                }
+                return $td;
 
 
         }
